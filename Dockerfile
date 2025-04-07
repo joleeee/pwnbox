@@ -4,7 +4,7 @@ RUN apt update
 RUN apt upgrade -y
 RUN apt install -y \
 	python3 python-is-python3 pip \
-	build-essential gcc gdb git curl locales
+	build-essential gcc gdb gdb-multiarch openocd tio git curl locales iputils-ping
 
 # locale stuff
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && \
@@ -24,14 +24,16 @@ WORKDIR /root
 RUN git clone https://github.com/pwndbg/pwndbg && cd pwndbg && ./setup.sh
 
 RUN apt install -y pkg-config libssl-dev liblzma-dev
-RUN /root/.cargo/bin/cargo install pwninit
-ENV PATH="/root/.cargo/bin:${PATH}"
+#RUN /root/.cargo/bin/cargo install pwninit
+#ENV PATH="/root/.cargo/bin:${PATH}"
 
 # zsh
 RUN apt install -y zsh
 COPY zshrc /root/.zshrc
 ENV SHELL=/bin/zsh
 
+# tools
+RUN apt install -y neovim file
 
 WORKDIR /chals
 CMD ["zsh"]
