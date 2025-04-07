@@ -33,7 +33,7 @@ COPY zshrc /root/.zshrc
 ENV SHELL=/bin/zsh
 
 # tools
-RUN apt install -y neovim file
+RUN apt install -y neovim file patchelf
 
 WORKDIR /chals
 CMD ["zsh"]
