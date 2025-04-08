@@ -33,7 +33,8 @@ COPY zshrc /root/.zshrc
 ENV SHELL=/bin/zsh
 
 # tools
-RUN apt install -y neovim file patchelf
+RUN apt install -y neovim file patchelf ruby
+RUN gem install one_gadget
 
 WORKDIR /chals
 CMD ["zsh"]
